@@ -40,5 +40,8 @@
   },
   "peerDependencies": {
     "cypress": "^3.0.0"
+  },
+  "dependencies": {
+    "mime-types": "^2.1.21"
   }
 }

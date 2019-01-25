@@ -1,10 +1,15 @@
-Cypress.Commands.add('upload', { prevSubject: 'element' }, (subject, file, fileName, mimeType) => {
+const mime = require('mime-types');
+
+Cypress.Commands.add('upload', { prevSubject: 'element' }, (subject, fileContent, fileName) => {
+  const mimeType = mime.lookup(fileName);
+
   cy.window().then(window => {
-    Cypress.Blob.base64StringToBlob(file, mimeType).then(blob => {
-      const testFile = new window.File([blob], fileName, { type: mimeType });
+    Cypress.Blob.base64StringToBlob(fileContent, mimeType).then(blob => {
+      const fileToUpload = new window.File([blob], fileName, { type: mimeType });
+
       cy.wrap(subject).trigger('drop', {
         dataTransfer: {
-          files: [testFile],
+          files: [fileToUpload],
           types: ['Files'],
         },
       });

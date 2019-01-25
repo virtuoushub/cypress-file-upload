@@ -28,8 +28,8 @@ import 'cypress-file-upload';
 Here is a simple example:
 
 ```javascript
-cy.fixture('data.json', 'base64').then(content => {
-  cy.get('[data-cy="dropzone"]').upload(content, 'data.json', 'application/json');
+cy.fixture('custom/folder/data.json', 'base64').then(content => {
+  cy.get('[data-cy="dropzone"]').upload(content, 'data.json');
 });
 ```
 
